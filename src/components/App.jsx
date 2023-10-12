@@ -29,7 +29,7 @@ class App extends Component {
   }
 
   fetchImages = async () => {
-    const { query, page, images } = this.state;
+    const { query, page } = this.state;
     this.setState({ loading: true });
 
     const response = await fetch(
@@ -62,7 +62,7 @@ class App extends Component {
   };
 
   render() {
-    const { query, images, loading, loadMore, selectedImage } = this.state;
+    const { images, loading, loadMore, selectedImage } = this.state;
     console.log('Loading:', loading);
 
     return (
