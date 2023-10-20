@@ -21,8 +21,15 @@ class App extends Component {
     };
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.query !== this.state.query || prevState.page !== this.state.page) {
+      this.fetchImages(this.state.query, this.state.page);
+    }
+  }
+
   fetchImages = async (query, page) => {
     try {
+      this.setState({ loading: true });
       const response = await fetch(
         `https://pixabay.com/api/?q=${query}&page=${page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`
       );
@@ -46,21 +53,11 @@ class App extends Component {
   }
 
   handleSearch = (query) => {
-    this.setState({ query, page: 1, images: [], loading: true }, () => {
-      this.fetchImages(query, 1);
-    });
+    this.setState({ query, page: 1, images: [] });
   }
 
   handleLoadMore = () => {
-    this.setState(
-      (prev) => ({
-        page: prev.page + 1,
-        loading: true,
-      }),
-      () => {
-        this.fetchImages(this.state.query, this.state.page);
-      }
-    );
+    this.setState((prev) => ({ page: prev.page + 1 }));
   }
 
   handleImageClick = (image) => {
