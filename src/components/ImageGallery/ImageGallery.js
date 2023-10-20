@@ -3,9 +3,8 @@ import './ImageGallery.css';
 import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
 
 const ImageGallery = ({ images, onImageClick }) => {
-    if (images.length > 0) {
-      console.log('Images: ', images.map((image) => image.id));
-    }
+    if (images.length > 0)
+    
     return (
       <ul className="ImageGallery">
         {images.map((image, index) => (
